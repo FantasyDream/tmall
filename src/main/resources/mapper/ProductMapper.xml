@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmall.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.tmall.model.Product">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="subTitle" jdbcType="VARCHAR" property="subtitle" />
+    <result column="orginalPrice" jdbcType="REAL" property="orginalprice" />
+    <result column="promotePrice" jdbcType="REAL" property="promoteprice" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, subTitle, orginalPrice, promotePrice, stock, cid, createDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product_
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tmall.model.Product">
+    insert into product_ (id, name, subTitle, 
+      orginalPrice, promotePrice, stock, 
+      cid, createDate)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR}, 
+      #{orginalprice,jdbcType=REAL}, #{promoteprice,jdbcType=REAL}, #{stock,jdbcType=INTEGER}, 
+      #{cid,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tmall.model.Product">
+    insert into product_
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="subtitle != null">
+        subTitle,
+      </if>
+      <if test="orginalprice != null">
+        orginalPrice,
+      </if>
+      <if test="promoteprice != null">
+        promotePrice,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="createdate != null">
+        createDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="orginalprice != null">
+        #{orginalprice,jdbcType=REAL},
+      </if>
+      <if test="promoteprice != null">
+        #{promoteprice,jdbcType=REAL},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tmall.model.Product">
+    update product_
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        subTitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="orginalprice != null">
+        orginalPrice = #{orginalprice,jdbcType=REAL},
+      </if>
+      <if test="promoteprice != null">
+        promotePrice = #{promoteprice,jdbcType=REAL},
+      </if>
+      <if test="stock != null">
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tmall.model.Product">
+    update product_
+    set name = #{name,jdbcType=VARCHAR},
+      subTitle = #{subtitle,jdbcType=VARCHAR},
+      orginalPrice = #{orginalprice,jdbcType=REAL},
+      promotePrice = #{promoteprice,jdbcType=REAL},
+      stock = #{stock,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=INTEGER},
+      createDate = #{createdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
