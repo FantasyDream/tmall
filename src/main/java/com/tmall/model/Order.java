@@ -1,135 +1,149 @@
 package com.tmall.model;
 
-import java.util.Date;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class Order {
-    private Integer id;
 
-    private String ordercode;
+  private int id;
+  private String orderCode;
+  private String address;
+  private String post;
+  private String receiver;
+  private String mobile;
+  private String userMessage;
+  private java.sql.Timestamp createDate;
+  private java.sql.Timestamp payDate;
+  private java.sql.Timestamp deliveryDate;
+  private java.sql.Timestamp confirmDate;
+  private int uid;
+  private String status;
+  private List<OrderItem> orderItems;
 
-    private String address;
+  public List<OrderItem> getOrderItems() {
+    return orderItems;
+  }
 
-    private String post;
+  public void setOrderItems(List<OrderItem> orderItemList) {
+    this.orderItems = orderItemList;
+  }
 
-    private String receiver;
+  public int getId() {
+    return id;
+  }
 
-    private String mobile;
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    private String usermessage;
 
-    private Date createdate;
+  public String getOrderCode() {
+    return orderCode;
+  }
 
-    private Date paydate;
+  public void setOrderCode(String orderCode) {
+    this.orderCode = orderCode;
+  }
 
-    private Date deliverydate;
 
-    private Date confirmdate;
+  public String getAddress() {
+    return address;
+  }
 
-    private Integer uid;
+  public void setAddress(String address) {
+    this.address = address;
+  }
 
-    private String status;
 
-    public Integer getId() {
-        return id;
-    }
+  public String getPost() {
+    return post;
+  }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public void setPost(String post) {
+    this.post = post;
+  }
 
-    public String getOrdercode() {
-        return ordercode;
-    }
 
-    public void setOrdercode(String ordercode) {
-        this.ordercode = ordercode == null ? null : ordercode.trim();
-    }
+  public String getReceiver() {
+    return receiver;
+  }
 
-    public String getAddress() {
-        return address;
-    }
+  public void setReceiver(String receiver) {
+    this.receiver = receiver;
+  }
 
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
 
-    public String getPost() {
-        return post;
-    }
+  public String getMobile() {
+    return mobile;
+  }
 
-    public void setPost(String post) {
-        this.post = post == null ? null : post.trim();
-    }
+  public void setMobile(String mobile) {
+    this.mobile = mobile;
+  }
 
-    public String getReceiver() {
-        return receiver;
-    }
 
-    public void setReceiver(String receiver) {
-        this.receiver = receiver == null ? null : receiver.trim();
-    }
+  public String getUserMessage() {
+    return userMessage;
+  }
 
-    public String getMobile() {
-        return mobile;
-    }
+  public void setUserMessage(String userMessage) {
+    this.userMessage = userMessage;
+  }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
-    }
 
-    public String getUsermessage() {
-        return usermessage;
-    }
+  public String getCreateDate() {
+    return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(createDate);
+  }
 
-    public void setUsermessage(String usermessage) {
-        this.usermessage = usermessage == null ? null : usermessage.trim();
-    }
+  public void setCreateDate(String createDate) {
+    this.createDate = Timestamp.valueOf(createDate);
+  }
 
-    public Date getCreatedate() {
-        return createdate;
-    }
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
-    }
+  public String getPayDate() {
+    return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(payDate);
+  }
 
-    public Date getPaydate() {
-        return paydate;
-    }
+  public void setPayDate(String payDate) {
+    this.payDate = Timestamp.valueOf(payDate);
+  }
 
-    public void setPaydate(Date paydate) {
-        this.paydate = paydate;
-    }
 
-    public Date getDeliverydate() {
-        return deliverydate;
-    }
+  public String getDeliveryDate() {
+    return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(deliveryDate);
+  }
 
-    public void setDeliverydate(Date deliverydate) {
-        this.deliverydate = deliverydate;
-    }
+  public void setDeliveryDate(String deliveryDate) {
+    this.deliveryDate = Timestamp.valueOf(deliveryDate);
+  }
 
-    public Date getConfirmdate() {
-        return confirmdate;
-    }
 
-    public void setConfirmdate(Date confirmdate) {
-        this.confirmdate = confirmdate;
-    }
+  public String getConfirmDate() {
+    return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(confirmDate);
+  }
 
-    public Integer getUid() {
-        return uid;
-    }
+  public void setConfirmDate(String confirmDate) {
+    this.confirmDate = Timestamp.valueOf(confirmDate);
+  }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
 
-    public String getStatus() {
-        return status;
-    }
+  public int getUid() {
+    return uid;
+  }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
-    }
+  public void setUid(int uid) {
+    this.uid = uid;
+  }
+
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
 }

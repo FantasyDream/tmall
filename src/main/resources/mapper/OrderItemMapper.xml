@@ -1,92 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tmall.mapper.OrderItemMapper">
-    <resultMap id="BaseResultMap" type="com.tmall.model.OrderItem">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="pid" jdbcType="INTEGER" property="pid"/>
-        <result column="oid" jdbcType="INTEGER" property="oid"/>
-        <result column="uid" jdbcType="INTEGER" property="uid"/>
-        <result column="number" jdbcType="INTEGER" property="number"/>
+    <resultMap id="orderItemBean" type="com.tmall.model.OrderItem">
+        <association property="product" javaType="Product" column="pid" select="com.tmall.mapper.ProductMapper.get"/>
     </resultMap>
-    <sql id="Base_Column_List">
-        id, pid, oid, uid, number
-    </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from orderitem_
-        where id = #{id,jdbcType=INTEGER}
+
+    <select id="list" resultMap="orderItemBean">
+        select *
+        from orderItem_
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from orderitem_
-        where id = #{id,jdbcType=INTEGER}
+
+    <select id="total" resultType="int">
+        select count(*)
+        from orderItem_
+    </select>
+
+    <insert id="insert" parameterType="OrderItem" keyProperty="id" useGeneratedKeys="true">
+        insert into orderItem_
+        values (null, #{pid}, #{oid}, #{uid}, #{number})
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete
+        from orderItem_
+        where id = #{0}
     </delete>
-    <insert id="insert" parameterType="com.tmall.model.OrderItem">
-        insert into orderitem_ (id, pid, oid, uid, number)
-        values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER},
-          #{uid,jdbcType=INTEGER}, #{number,jdbcType=INTEGER})
-    </insert>
-    <insert id="insertSelective" parameterType="com.tmall.model.OrderItem">
-        insert into orderitem_
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="pid != null">
-                pid,
-            </if>
-            <if test="oid != null">
-                oid,
-            </if>
-            <if test="uid != null">
-                uid,
-            </if>
-            <if test="number != null">
-                number,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="pid != null">
-                #{pid,jdbcType=INTEGER},
-            </if>
-            <if test="oid != null">
-                #{oid,jdbcType=INTEGER},
-            </if>
-            <if test="uid != null">
-                #{uid,jdbcType=INTEGER},
-            </if>
-            <if test="number != null">
-                #{number,jdbcType=INTEGER},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.tmall.model.OrderItem">
-        update orderitem_
-        <set>
-            <if test="pid != null">
-                pid = #{pid,jdbcType=INTEGER},
-            </if>
-            <if test="oid != null">
-                oid = #{oid,jdbcType=INTEGER},
-            </if>
-            <if test="uid != null">
-                uid = #{uid,jdbcType=INTEGER},
-            </if>
-            <if test="number != null">
-                number = #{number,jdbcType=INTEGER},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
+
+    <update id="update" parameterType="OrderItem">
+        update orderItem_
+        set number = #{number}
+        where id = #{id}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.tmall.model.OrderItem">
-        update orderitem_
-        set pid = #{pid,jdbcType=INTEGER},
-        oid = #{oid,jdbcType=INTEGER},
-        uid = #{uid,jdbcType=INTEGER},
-        number = #{number,jdbcType=INTEGER}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
+
+    <select id="get" parameterType="int" resultMap="orderItemBean">
+        select *
+        from orderItem_
+        where id = #{0}
+    </select>
+
+    <select id="listByOid" parameterType="int" resultMap="orderItemBean">
+        select *
+        from orderItem_
+        where oid = #{0}
+    </select>
+
+    <select id="listByUid" parameterType="int" resultMap="orderItemBean">
+        select *
+        from orderItem_
+        where pid = #{0}
+    </select>
+
 </mapper>

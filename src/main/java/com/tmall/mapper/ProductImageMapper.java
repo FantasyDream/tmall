@@ -2,16 +2,25 @@ package com.tmall.mapper;
 
 import com.tmall.model.ProductImage;
 
+import java.util.List;
+
 public interface ProductImageMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(ProductImage record);
+    int insert(ProductImage productImage);
 
-    int insertSelective(ProductImage record);
+    int delete(int id);
 
-    ProductImage selectByPrimaryKey(Integer id);
+    ProductImage get(int id);
 
-    int updateByPrimaryKeySelective(ProductImage record);
+    int update(ProductImage productImage);
 
-    int updateByPrimaryKey(ProductImage record);
+    List<ProductImage> listByPid(int pid);
+
+    List<ProductImage> list();
+
+    int deleteByPid(int pid);
+
+    List<ProductImage> listByPidAndTypeDetail(int pid);
+
+    List<ProductImage> listByPidAndTypeSingle(int pid);
 }

@@ -1,188 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tmall.mapper.OrderMapper">
-    <resultMap id="BaseResultMap" type="com.tmall.model.Order">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="orderCode" jdbcType="VARCHAR" property="ordercode"/>
-        <result column="address" jdbcType="VARCHAR" property="address"/>
-        <result column="post" jdbcType="VARCHAR" property="post"/>
-        <result column="receiver" jdbcType="VARCHAR" property="receiver"/>
-        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
-        <result column="userMessage" jdbcType="VARCHAR" property="usermessage"/>
-        <result column="createDate" jdbcType="TIMESTAMP" property="createdate"/>
-        <result column="payDate" jdbcType="TIMESTAMP" property="paydate"/>
-        <result column="deliveryDate" jdbcType="TIMESTAMP" property="deliverydate"/>
-        <result column="confirmDate" jdbcType="TIMESTAMP" property="confirmdate"/>
-        <result column="uid" jdbcType="INTEGER" property="uid"/>
-        <result column="status" jdbcType="VARCHAR" property="status"/>
+    <resultMap id="orderBean" type="com.tmall.model.Order">
+        <id column="id" property="id"/>
+        <result column="uid" property="uid"/>
+        <association property="user" javaType="User" column="uid"
+                     select="com.tmall.mapper.UserMapper.get"/>
+        <collection property="orderItems" column="id" ofType="OrderItem"
+                    select="com.tmall.mapper.OrderItemMapper.listByOid"/>
     </resultMap>
-    <sql id="Base_Column_List">
-    id, orderCode, address, post, receiver, mobile, userMessage, createDate, payDate, 
-    deliveryDate, confirmDate, uid, status
-  </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
+
+    <select id="list" resultMap="orderBean">
+        select *
         from order_
-        where id = #{id,jdbcType=INTEGER}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order_
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-    <insert id="insert" parameterType="com.tmall.model.Order">
-    insert into order_ (id, orderCode, address, 
-      post, receiver, mobile, 
-      userMessage, createDate, payDate, 
-      deliveryDate, confirmDate, uid, 
-      status)
-    values (#{id,jdbcType=INTEGER}, #{ordercode,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{post,jdbcType=VARCHAR}, #{receiver,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{usermessage,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{paydate,jdbcType=TIMESTAMP}, 
-      #{deliverydate,jdbcType=TIMESTAMP}, #{confirmdate,jdbcType=TIMESTAMP}, #{uid,jdbcType=INTEGER}, 
-      #{status,jdbcType=VARCHAR})
-  </insert>
-    <insert id="insertSelective" parameterType="com.tmall.model.Order">
+
+    <select id="total" resultType="int">
+        select count(*)
+        from order_
+    </select>
+
+    <insert id="insert" parameterType="Order" keyProperty="id" useGeneratedKeys="true">
         insert into order_
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="ordercode != null">
-                orderCode,
-            </if>
-            <if test="address != null">
-                address,
-            </if>
-            <if test="post != null">
-                post,
-            </if>
-            <if test="receiver != null">
-                receiver,
-            </if>
-            <if test="mobile != null">
-                mobile,
-            </if>
-            <if test="usermessage != null">
-                userMessage,
-            </if>
-            <if test="createdate != null">
-                createDate,
-            </if>
-            <if test="paydate != null">
-                payDate,
-            </if>
-            <if test="deliverydate != null">
-                deliveryDate,
-            </if>
-            <if test="confirmdate != null">
-                confirmDate,
-            </if>
-            <if test="uid != null">
-                uid,
-            </if>
-            <if test="status != null">
-                status,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="ordercode != null">
-                #{ordercode,jdbcType=VARCHAR},
-            </if>
-            <if test="address != null">
-                #{address,jdbcType=VARCHAR},
-            </if>
-            <if test="post != null">
-                #{post,jdbcType=VARCHAR},
-            </if>
-            <if test="receiver != null">
-                #{receiver,jdbcType=VARCHAR},
-            </if>
-            <if test="mobile != null">
-                #{mobile,jdbcType=VARCHAR},
-            </if>
-            <if test="usermessage != null">
-                #{usermessage,jdbcType=VARCHAR},
-            </if>
-            <if test="createdate != null">
-                #{createdate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="paydate != null">
-                #{paydate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="deliverydate != null">
-                #{deliverydate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="confirmdate != null">
-                #{confirmdate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="uid != null">
-                #{uid,jdbcType=INTEGER},
-            </if>
-            <if test="status != null">
-                #{status,jdbcType=VARCHAR},
-            </if>
-        </trim>
+        values (null,
+                #{orderCode},
+                #{address},
+                #{post},
+                #{receiver},
+                #{mobile},
+                #{userMessage},
+                current_time,
+                #{payDate},
+                #{delivery},
+                #{confirmDate},
+                #{uid},
+                #{status})
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.tmall.model.Order">
+
+    <delete id="delete" parameterType="int">
+        delete
+        from order_
+        where id = #{0}
+    </delete>
+
+    <update id="update" parameterType="Order">
         update order_
         <set>
-            <if test="ordercode != null">
-                orderCode = #{ordercode,jdbcType=VARCHAR},
+            <if test="orderCode != null">
+                orderCode = #{orderCode},
             </if>
             <if test="address != null">
-                address = #{address,jdbcType=VARCHAR},
+                address = #{address},
             </if>
             <if test="post != null">
-                post = #{post,jdbcType=VARCHAR},
+                post = #{post},
             </if>
             <if test="receiver != null">
-                receiver = #{receiver,jdbcType=VARCHAR},
+                reciver = #{receiver},
             </if>
             <if test="mobile != null">
-                mobile = #{mobile,jdbcType=VARCHAR},
+                mobile = #{mobile},
             </if>
-            <if test="usermessage != null">
-                userMessage = #{usermessage,jdbcType=VARCHAR},
+            <if test="userMessage != null">
+                userMessage = #{userMessage},
             </if>
-            <if test="createdate != null">
-                createDate = #{createdate,jdbcType=TIMESTAMP},
+            <if test="payDate != null">
+                payDate = #{payDate}
             </if>
-            <if test="paydate != null">
-                payDate = #{paydate,jdbcType=TIMESTAMP},
+            <if test="deliveryDate != null">
+                deliveryDate = #{deliverDate}
             </if>
-            <if test="deliverydate != null">
-                deliveryDate = #{deliverydate,jdbcType=TIMESTAMP},
+            <if test="confirmDate != null">
+                confirmDate = #{confirmDate}
             </if>
-            <if test="confirmdate != null">
-                confirmDate = #{confirmdate,jdbcType=TIMESTAMP},
+            <if test="uid !=null">
+                uid = #{uid}
             </if>
-            <if test="uid != null">
-                uid = #{uid,jdbcType=INTEGER},
-            </if>
-            <if test="status != null">
-                status = #{status,jdbcType=VARCHAR},
+            <if test="status !=null">
+                'status' = #{status}
             </if>
         </set>
-        where id = #{id,jdbcType=INTEGER}
+        where id=#{id}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.tmall.model.Order">
-    update order_
-    set orderCode = #{ordercode,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      post = #{post,jdbcType=VARCHAR},
-      receiver = #{receiver,jdbcType=VARCHAR},
-      mobile = #{mobile,jdbcType=VARCHAR},
-      userMessage = #{usermessage,jdbcType=VARCHAR},
-      createDate = #{createdate,jdbcType=TIMESTAMP},
-      payDate = #{paydate,jdbcType=TIMESTAMP},
-      deliveryDate = #{deliverydate,jdbcType=TIMESTAMP},
-      confirmDate = #{confirmdate,jdbcType=TIMESTAMP},
-      uid = #{uid,jdbcType=INTEGER},
-      status = #{status,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
+    <select id="get" parameterType="int" resultMap="orderBean">
+        select *
+        from order_
+        where id = #{0}
+    </select>
+
+    <select id="listByUid" parameterType="int" resultMap="orderBean">
+        select *
+        from order_
+        where uid = #{0}
+    </select>
+
 </mapper>

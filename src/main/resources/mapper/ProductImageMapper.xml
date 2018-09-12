@@ -1,71 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tmall.mapper.ProductImageMapper">
-  <resultMap id="BaseResultMap" type="com.tmall.model.ProductImage">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="pid" jdbcType="INTEGER" property="pid" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, pid, type
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from productimage_
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from productimage_
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.tmall.model.ProductImage">
-    insert into productimage_ (id, pid, type
-      )
-    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.tmall.model.ProductImage">
-    insert into productimage_
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="pid != null">
-        pid,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="pid != null">
-        #{pid,jdbcType=INTEGER},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.tmall.model.ProductImage">
-    update productimage_
-    <set>
-      <if test="pid != null">
-        pid = #{pid,jdbcType=INTEGER},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.tmall.model.ProductImage">
-    update productimage_
-    set pid = #{pid,jdbcType=INTEGER},
-      type = #{type,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <resultMap id="productImageBean" type="ProductImage">
+        <result column="pid" property="pid" />
+        <association property="product" javaType="Product" column="pid" select="com.tmall.mapper.ProductMapper.get"/>
+    </resultMap>
+
+    <select id="list" resultMap="productImageBean">
+        select *
+        from productImage_
+    </select>
+
+    <insert id="insert" parameterType="ProductImage" keyProperty="id" useGeneratedKeys="true">
+        insert into productImage_
+        values (null, #{pid},#{type})
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete
+        from productImage_
+        where id = #{0}
+    </delete>
+
+    <update id="update" parameterType="ProductImage">
+        update productImage_
+        <set>
+            <if test="pid != null">
+                pid = #{pid}
+            </if>
+            <if test="type != null">
+                type = #{type}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="get" parameterType="int" resultMap="productImageBean">
+        select *
+        from productImage_
+        where id = #{0}
+    </select>
+
+    <select id="listByPid" parameterType="int" resultMap="productImageBean">
+        select *
+        from productImage_
+        where pid = #{0}
+    </select>
+
+    <select id="listByPidAndTypeDetail" parameterType="int" resultMap="productImageBean">
+        select *
+        from productImage_
+        where pid = #{0} and type = 'type_detail'
+    </select>
+
+    <select id="listByPidAndTypeSingle" parameterType="int" resultMap="productImageBean">
+        select *
+        from productImage_
+        where pid = #{0} and type = 'type_single'
+    </select>
+
 </mapper>

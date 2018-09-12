@@ -2,16 +2,16 @@ package com.tmall.mapper;
 
 import com.tmall.model.Property;
 
+import java.util.List;
+
 public interface PropertyMapper {
-    int deleteByPrimaryKey(Integer id);
+    int insert(Property property);
 
-    int insert(Property record);
+    int delete(int id);
 
-    int insertSelective(Property record);
+    Property get(int id);
 
-    Property selectByPrimaryKey(Integer id);
+    int update(Property property);
 
-    int updateByPrimaryKeySelective(Property record);
-
-    int updateByPrimaryKey(Property record);
+    List<Property> list(int cid);
 }

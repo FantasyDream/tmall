@@ -1,33 +1,45 @@
 package com.tmall.model;
 
+
 public class Property {
-    private Integer id;
 
-    private Integer cid;
+  private int id;
+  private int cid;
+  private String name;
+  private Category category;
 
-    private String name;
+  public Category getCategory() {
+    return category;
+  }
 
-    public Integer getId() {
-        return id;
-    }
+  public void setCategory(Category category) {
+    this.category = category;
+  }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public Integer getCid() {
-        return cid;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public void setCid(Integer cid) {
-        this.cid = cid;
-    }
 
-    public String getName() {
-        return name;
-    }
+  public int getCid() {
+    return cid;
+  }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+  public void setCid(int cid) {
+    this.cid = cid;
+  }
+
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
 }

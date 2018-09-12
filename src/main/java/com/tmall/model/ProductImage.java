@@ -1,33 +1,45 @@
 package com.tmall.model;
 
+
 public class ProductImage {
-    private Integer id;
 
-    private Integer pid;
+  private int id;
+  private int pid;
+  private String type;
+  private Product product;
 
-    private String type;
+  public Product getProduct() {
+    return product;
+  }
 
-    public Integer getId() {
-        return id;
-    }
+  public void setProduct(Product product) {
+    this.product = product;
+  }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public Integer getPid() {
-        return pid;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public void setPid(Integer pid) {
-        this.pid = pid;
-    }
 
-    public String getType() {
-        return type;
-    }
+  public int getPid() {
+    return pid;
+  }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
-    }
+  public void setPid(int pid) {
+    this.pid = pid;
+  }
+
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
 }

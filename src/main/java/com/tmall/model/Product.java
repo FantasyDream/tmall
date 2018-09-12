@@ -1,85 +1,117 @@
 package com.tmall.model;
 
-import java.util.Date;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class Product {
-    private Integer id;
 
+    private int id;
     private String name;
+    private String subTitle;
+    private double originalPrice;
+    private double promotePrice;
+    private int stock;
+    private int cid;
+    private java.sql.Timestamp createDate;
+    private Category category;
+    private List<ProductImage> singleProductImages;
+    private List<ProductImage> detailProductImages;
 
-    private String subtitle;
+    public List<ProductImage> getDetailProductImages() {
+        return detailProductImages;
+    }
 
-    private Float orginalprice;
+    public void setDetailProductImages(List<ProductImage> detailProductImages) {
+        this.detailProductImages = detailProductImages;
+    }
 
-    private Float promoteprice;
+    public List<ProductImage> getSingleProductImages() {
+        return singleProductImages;
+    }
 
-    private Integer stock;
+    public void setSingleProductImages(List<ProductImage> singleProductImages) {
+        this.singleProductImages = singleProductImages;
+    }
 
-    private Integer cid;
+    public Category getCategory() {
+        return category;
+    }
 
-    private Date createdate;
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
+
 
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
-    public String getSubtitle() {
-        return subtitle;
+
+    public String getSubTitle() {
+        return subTitle;
     }
 
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle == null ? null : subtitle.trim();
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
 
-    public Float getOrginalprice() {
-        return orginalprice;
+
+    public double getOriginalPrice() {
+        return originalPrice;
     }
 
-    public void setOrginalprice(Float orginalprice) {
-        this.orginalprice = orginalprice;
+    public void setOriginalPrice(double originalPrice) {
+        this.originalPrice = originalPrice;
     }
 
-    public Float getPromoteprice() {
-        return promoteprice;
+
+    public double getPromotePrice() {
+        return promotePrice;
     }
 
-    public void setPromoteprice(Float promoteprice) {
-        this.promoteprice = promoteprice;
+    public void setPromotePrice(double promotePrice) {
+        this.promotePrice = promotePrice;
     }
 
-    public Integer getStock() {
+
+    public int getStock() {
         return stock;
     }
 
-    public void setStock(Integer stock) {
+    public void setStock(int stock) {
         this.stock = stock;
     }
 
-    public Integer getCid() {
+
+    public int getCid() {
         return cid;
     }
 
-    public void setCid(Integer cid) {
+    public void setCid(int cid) {
         this.cid = cid;
     }
 
-    public Date getCreatedate() {
-        return createdate;
+
+    public String getCreateDate() {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(createDate);
     }
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
+    public void setCreateDate(String createDate) {
+        this.createDate = Timestamp.valueOf(createDate);
     }
+
 }

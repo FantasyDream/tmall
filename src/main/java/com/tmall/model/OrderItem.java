@@ -1,53 +1,65 @@
 package com.tmall.model;
 
+
 public class OrderItem {
-    private Integer id;
 
-    private Integer pid;
+    private int id;
+    private int pid;
+    private int oid;
+    private int uid;
+    private int number;
+    private Product product;
 
-    private Integer oid;
+    public Product getProduct() {
+        return product;
+    }
 
-    private Integer uid;
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
-    private Integer number;
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Integer getPid() {
+
+    public int getPid() {
         return pid;
     }
 
-    public void setPid(Integer pid) {
+    public void setPid(int pid) {
         this.pid = pid;
     }
 
-    public Integer getOid() {
+
+    public int getOid() {
         return oid;
     }
 
-    public void setOid(Integer oid) {
+    public void setOid(int oid) {
         this.oid = oid;
     }
 
-    public Integer getUid() {
+
+    public int getUid() {
         return uid;
     }
 
-    public void setUid(Integer uid) {
+    public void setUid(int uid) {
         this.uid = uid;
     }
 
-    public Integer getNumber() {
+
+    public int getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(int number) {
         this.number = number;
     }
+
 }

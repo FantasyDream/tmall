@@ -2,16 +2,23 @@ package com.tmall.mapper;
 
 import com.tmall.model.Product;
 
+import java.util.List;
+
 public interface ProductMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(Product record);
+    List<Product> selectAll();
 
-    int insertSelective(Product record);
+    int insert(Product product);
 
-    Product selectByPrimaryKey(Integer id);
+    int total();
 
-    int updateByPrimaryKeySelective(Product record);
+    int delete(int id);
 
-    int updateByPrimaryKey(Product record);
+    int update(Product product);
+
+    Product get(int id);
+
+    List<Product> listByCid(int cid);
+
+    List<Product> listByKeyWord(String keyWord);
 }

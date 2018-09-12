@@ -2,16 +2,19 @@ package com.tmall.mapper;
 
 import com.tmall.model.User;
 
+import java.util.List;
+
 public interface UserMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(User record);
+    int insert(User user);
 
-    int insertSelective(User record);
+    int delete(int id);
 
-    User selectByPrimaryKey(Integer id);
+    User get(int id);
 
-    int updateByPrimaryKeySelective(User record);
+    int update(User user);
 
-    int updateByPrimaryKey(User record);
+    List<User> list();
+
+    User selectByUsername(String username);
 }

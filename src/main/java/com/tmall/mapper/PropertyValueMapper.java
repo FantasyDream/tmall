@@ -2,16 +2,21 @@ package com.tmall.mapper;
 
 import com.tmall.model.PropertyValue;
 
+import java.util.List;
+
 public interface PropertyValueMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(PropertyValue record);
+    int insert(PropertyValue propertyValue);
 
-    int insertSelective(PropertyValue record);
+    int delete(int id);
 
-    PropertyValue selectByPrimaryKey(Integer id);
+    PropertyValue get(int id);
 
-    int updateByPrimaryKeySelective(PropertyValue record);
+    int update(PropertyValue propertyValue);
 
-    int updateByPrimaryKey(PropertyValue record);
+    List<PropertyValue> listByPid(int pid);
+
+    int deleteByPid(int pid);
+
+    int deleteByPtid(int pid);
 }

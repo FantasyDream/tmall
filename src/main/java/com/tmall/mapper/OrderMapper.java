@@ -2,16 +2,23 @@ package com.tmall.mapper;
 
 import com.tmall.model.Order;
 
+import java.util.List;
+
 public interface OrderMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(Order record);
+    List<Order> listByUid(int uid);
 
-    int insertSelective(Order record);
+    int insert(Order order);
 
-    Order selectByPrimaryKey(Integer id);
+    int total();
 
-    int updateByPrimaryKeySelective(Order record);
+    int delete(int id);
 
-    int updateByPrimaryKey(Order record);
+    int update(Order order);
+
+    Order get(int id);
+
+    List<Order> list();
+
+
 }

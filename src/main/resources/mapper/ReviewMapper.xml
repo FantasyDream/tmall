@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmall.mapper.ReviewMapper">
+    <resultMap id="reviewBean" type="Review">
+        <result column="pid" property="pid"/>
+        <result column="uid" property="uid"/>
+        <association property="product" column="pid" javaType="Product" select="com.tmall.mapper.ProductMapper.get"/>
+        <association property="user" column="uid" javaType="User" select="com.tmall.mapper.UserMapper.get"/>
+    </resultMap>
+    <select id="list" resultMap="reviewBean">
+        select *
+        from review_
+    </select>
+
+    <insert id="insert" parameterType="Review" keyProperty="id" useGeneratedKeys="true">
+        insert into review_
+        values (null, #{content}, #{uid},#{pid},current_time);
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete
+        from review_
+        where id = #{0}
+    </delete>
+
+    <update id="update" parameterType="Review">
+        update review_
+        <set>
+            <if test="content !=null">
+                content = #{content},
+            </if>
+            <if test="uid != null">
+                uid = #{uid},
+            </if>
+            <if test="pid != null">
+                pid = #{pid}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="get" parameterType="int" resultMap="reviewBean">
+        select *
+        from review_
+        where id = #{0}
+    </select>
+
+    <select id="listByPid" parameterType="int" resultMap="reviewBean">
+        select *
+        from propertyvalue_
+        where pid = #{pid}
+    </select>
+
+    <select id="listByUid" parameterType="int" resultMap="reviewBean">
+        select *
+        from review_
+        where uid = #{0}
+    </select>
+
+</mapper>

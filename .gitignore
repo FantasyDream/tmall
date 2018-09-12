@@ -53,3 +53,9 @@ gradle/
 gradlew
 gradlew.bat
 unused.txt
+*/target/
+target/
+*/src/main/webapp/img/
+src/main/webapp/img/
+*.png
+*.jpg

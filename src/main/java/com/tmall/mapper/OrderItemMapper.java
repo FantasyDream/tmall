@@ -2,16 +2,25 @@ package com.tmall.mapper;
 
 import com.tmall.model.OrderItem;
 
+import java.util.List;
+
 public interface OrderItemMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(OrderItem record);
+    List<OrderItem> listByPid(int pid);
 
-    int insertSelective(OrderItem record);
+    List<OrderItem> listByOid(int oid);
 
-    OrderItem selectByPrimaryKey(Integer id);
+    int insert(OrderItem orderItem);
 
-    int updateByPrimaryKeySelective(OrderItem record);
+    int total();
 
-    int updateByPrimaryKey(OrderItem record);
+    int delete(int id);
+
+    int update(OrderItem orderItem);
+
+    OrderItem get(int id);
+
+    List<OrderItem> list();
+
+    boolean deleteByOid(int oid);
 }

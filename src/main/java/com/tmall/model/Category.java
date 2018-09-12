@@ -18,6 +18,6 @@ public class Category {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 }

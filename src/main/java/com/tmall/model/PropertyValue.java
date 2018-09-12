@@ -1,43 +1,55 @@
 package com.tmall.model;
 
+
 public class PropertyValue {
-    private Integer id;
 
-    private Integer pid;
-
-    private Integer ptid;
-
+    private int id;
+    private int pid;
+    private int ptid;
     private String value;
+    private Property property;
 
-    public Integer getId() {
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Integer getPid() {
+
+    public int getPid() {
         return pid;
     }
 
-    public void setPid(Integer pid) {
+    public void setPid(int pid) {
         this.pid = pid;
     }
 
-    public Integer getPtid() {
+
+    public int getPtid() {
         return ptid;
     }
 
-    public void setPtid(Integer ptid) {
+    public void setPtid(int ptid) {
         this.ptid = ptid;
     }
+
 
     public String getValue() {
         return value;
     }
 
     public void setValue(String value) {
-        this.value = value == null ? null : value.trim();
+        this.value = value;
     }
+
 }

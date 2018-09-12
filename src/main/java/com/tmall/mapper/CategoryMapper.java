@@ -2,16 +2,23 @@ package com.tmall.mapper;
 
 import com.tmall.model.Category;
 
+import java.util.List;
+
 public interface CategoryMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(Category record);
+    /**
+     * 查找所有Category
+     * @return category的list数组
+     */
+    List<Category> selectAll();
 
-    int insertSelective(Category record);
+    int insert(Category category);
 
-    Category selectByPrimaryKey(Integer id);
+    int total();
 
-    int updateByPrimaryKeySelective(Category record);
+    int delete(int id);
 
-    int updateByPrimaryKey(Category record);
+    int update(Category category);
+
+    Category get(int id);
 }
