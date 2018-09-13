@@ -16,7 +16,7 @@ public class PageController {
     @Autowired
     CategoryService categoryService;
 
-    @RequestMapping("")
+    @RequestMapping("/")
     public String home(Model model){
         List<Category> cs = categoryService.selectAll();
         model.addAttribute("cs",cs);

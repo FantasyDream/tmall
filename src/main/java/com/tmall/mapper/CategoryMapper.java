@@ -12,6 +12,14 @@ public interface CategoryMapper {
      */
     List<Category> selectAll();
 
+
+    /**
+     * @param category
+     * 要出入数据库的 category 对象
+     *
+     * @return int
+     * 收到影响的行数
+     */
     int insert(Category category);
 
     int total();

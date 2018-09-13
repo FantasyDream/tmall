@@ -20,6 +20,7 @@
 	<link href="css/fore/style.css" rel="stylesheet">
 	<script>
         function formatMoney(num){
+            console.log(1);
             num = num.toString().replace(/\$|\,/g,'');
             if(isNaN(num))
                 num = "0";
